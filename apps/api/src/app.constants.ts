@@ -1,6 +1,7 @@
 const DATABASE_DOCUMENTS = {
   USERS: 'users',
   TOKENS: 'tokens',
+  ALLOWED_EMAILS: 'allowed_emails',
 };
 
 const COOKIES = {

@@ -9,15 +9,10 @@ const publicRoutes = routeUtil.getRoutes([
 
 const privateRoutes = routeUtil.getRoutes([
   list,
-]);
-
-const adminRoutes = routeUtil.getRoutes([
-  list,
   remove,
 ]);
 
 export default {
   publicRoutes,
   privateRoutes,
-  adminRoutes,
 };

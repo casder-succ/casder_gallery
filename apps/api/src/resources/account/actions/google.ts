@@ -1,8 +1,10 @@
 import config from 'config';
 
-import { userService } from 'resources/user';
 import { googleService, authService } from 'services';
-import { AppRouter, AppKoaContext } from 'types';
+import { AppRouter, AppKoaContext, Next } from 'types';
+
+import { userService } from 'resources/user';
+import { allowedEmailService } from 'resources/allowed-email';
 
 type ValidatedData = {
   given_name: string;
@@ -13,13 +15,15 @@ type ValidatedData = {
 
 const getOAuthUrl = async (ctx: AppKoaContext) => {
   const isValidCredentials = config.google.clientId || config.google.clientSecret;
+
   ctx.assertClientError(isValidCredentials, {
     global: 'Setup Google Oauth credentials on API',
   });
+
   ctx.redirect(googleService.oAuthURL);
 };
 
-const signInGoogleWithCode = async (ctx: AppKoaContext) => {
+const validator = async (ctx: AppKoaContext<ValidatedData>, next: Next) => {
   const { code } = ctx.request.query;
 
   const { isValid, payload } = await googleService.
@@ -27,49 +31,48 @@ const signInGoogleWithCode = async (ctx: AppKoaContext) => {
 
   ctx.assertError(isValid, `Exchange code for token error: ${payload}`);
 
-  const  user = await userService.findOne({ email: payload.email });
-  let userChanged;
+  const isAllowed = await allowedEmailService.exists({
+    email: payload.email,
+  });
 
-  if (user) {
-    if (!user.oauth?.google) {
-      userChanged = await userService.updateOne(
-        { _id: user._id },
-        (old) => ({ ...old, oauth: { google: true } }),
-      );
-    }
-    const userUpdated = userChanged || user;
-    await Promise.all([
-      userService.updateLastRequest(userUpdated._id),
-      authService.setTokens(ctx, userUpdated._id),
-    ]);
+  ctx.assertError(isAllowed || config.rootAdmin === payload.email, 'Email is not allowed');
 
-  } else {
-    const newUser = await userService.insertOne({
-      firstName: payload.given_name,
-      lastName: payload.family_name,
-      fullName: `${payload.given_name} ${payload.family_name}`,
-      email: payload.email,
-      isEmailVerified: true,
-      avatarUrl: payload.picture,
-      oauth: {
-        google: true,
-      },
-    });
+  ctx.validatedData = payload;
 
-    if (newUser) {
-      await Promise.all([
-        userService.updateLastRequest(newUser._id),
-        authService.setTokens(ctx, newUser._id),
-      ]);
-    }
-  }
-
-  ctx.redirect(config.webUrl);
+  await next();
 };
 
+const signInGoogleWithCode = async (ctx: AppKoaContext<ValidatedData>) => {
+  const payload = ctx.validatedData;
 
+  const  user = await userService.findOne({ email: payload.email });
+
+  if (user) {
+    return Promise.all([
+      userService.updateLastRequest(user._id),
+      authService.setTokens(ctx, user._id),
+    ]);
+  }
+
+  const newUser = await userService.insertOne({
+    firstName: payload.given_name,
+    lastName: payload.family_name,
+    fullName: `${payload.given_name} ${payload.family_name}`,
+    email: payload.email,
+    avatarUrl: payload.picture,
+  });
+
+  if (newUser) {
+    await Promise.all([
+      userService.updateLastRequest(newUser._id),
+      authService.setTokens(ctx, newUser._id),
+    ]);
+  }
+
+  ctx.redirect(config.adminUrl);
+};
 
 export default (router: AppRouter) => {
   router.get('/sign-in/google/auth', getOAuthUrl);
-  router.get('/sign-in/google', signInGoogleWithCode);
+  router.get('/sign-in/google', validator, signInGoogleWithCode);
 };

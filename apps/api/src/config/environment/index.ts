@@ -12,9 +12,7 @@ const base = {
   },
   apiUrl: '',
   webUrl: '',
-  redis: process.env.REDIS_CONNECTION || '',
-  sendgridApiKey: process.env.SENDGRID_API_KEY || '',
-  adminKey: process.env.ADMIN_KEY || '',
+  adminUrl: '',
   cloudStorage: {
     endpoint: process.env.CLOUD_STORAGE_ENDPOINT || '',
     bucket: process.env.CLOUD_STORAGE_BUCKET || '',
@@ -31,6 +29,7 @@ const base = {
   mixpanel: {
     apiKey: process.env.MIXPANEL_API_KEY || '',
   },
+  rootAdmin: '',
 };
 
 const config = configUtil.loadConfig(base, env, __dirname);

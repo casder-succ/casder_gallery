@@ -6,6 +6,7 @@ export const useStyles = createStyles(() => ({
     padding: '0 32px',
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: '#092327',
   },
   content: {
     width: '100%',

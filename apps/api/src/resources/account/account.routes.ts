@@ -11,11 +11,7 @@ const privateRoutes = routeUtil.getRoutes([
   get,
 ]);
 
-const adminRoutes = routeUtil.getRoutes([
-]);
-
 export default {
   publicRoutes,
   privateRoutes,
-  adminRoutes,
 };

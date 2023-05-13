@@ -33,6 +33,11 @@ const PageConfig: FC<PageConfigProps> = ({ children }) => {
   const Scope = Fragment;
   const Layout = layout ? layoutToComponent[layout] : Fragment;
 
+  if (scope === ScopeType.PRIVATE && !account) {
+    push(RoutePath.SignIn);
+    return null;
+  }
+
   if (scope === ScopeType.PUBLIC && account) {
     push(RoutePath.Home);
     return null;
