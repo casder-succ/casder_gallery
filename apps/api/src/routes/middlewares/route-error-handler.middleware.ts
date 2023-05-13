@@ -1,4 +1,3 @@
-import logger from 'logger';
 import { AppKoaContext, Next } from 'types';
 
 const routeErrorHandler = async (ctx: AppKoaContext, next: Next) => {
@@ -9,7 +8,6 @@ const routeErrorHandler = async (ctx: AppKoaContext, next: Next) => {
     const serverError = { global: error.message };
 
     const errors = clientError || serverError;
-    logger.error(errors);
 
     if (serverError && process.env.APP_ENV === 'production') {
       serverError.global = 'Something went wrong';
