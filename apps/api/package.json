@@ -1,8 +1,8 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "Koa.js API",
-  "author": "Paralect",
+  "description": "Casder gallery API",
+  "author": "Vadim Samal",
   "license": "MIT",
   "scripts": {
     "build:tsc": "tsc",

@@ -9,16 +9,10 @@ import 'resources/user/user.handlers';
 import environmentConfig from 'config';
 import MainLayout from './MainLayout';
 import UnauthorizedLayout from './UnauthorizedLayout';
-import PrivateScope from './PrivateScope';
 
 const layoutToComponent = {
   [LayoutType.MAIN]: MainLayout,
   [LayoutType.UNAUTHORIZED]: UnauthorizedLayout,
-};
-
-const scopeToComponent = {
-  [ScopeType.PUBLIC]: Fragment,
-  [ScopeType.PRIVATE]: PrivateScope,
 };
 
 interface PageConfigProps {
@@ -36,13 +30,8 @@ const PageConfig: FC<PageConfigProps> = ({ children }) => {
   if (isAccountLoading) return null;
 
   const { scope, layout } = routesConfiguration[route as RoutePath] || {};
-  const Scope = scope ? scopeToComponent[scope] : Fragment;
+  const Scope = Fragment;
   const Layout = layout ? layoutToComponent[layout] : Fragment;
-
-  if (scope === ScopeType.PRIVATE && !account) {
-    push(RoutePath.SignIn);
-    return null;
-  }
 
   if (scope === ScopeType.PUBLIC && account) {
     push(RoutePath.Home);

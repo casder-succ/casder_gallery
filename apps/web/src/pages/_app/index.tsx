@@ -4,11 +4,10 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { Global, MantineProvider } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import { ModalsProvider } from '@mantine/modals';
 
 import queryClient from 'query-client';
-import shipTheme from 'theme/ship-theme';
+import appTheme from 'theme';
 import { globalStyles } from 'theme/globalStyles';
 
 import PageConfig from './PageConfig';
@@ -16,17 +15,17 @@ import PageConfig from './PageConfig';
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <>
     <Head>
-      <title>Ship</title>
+      <title>Casder gallery</title>
     </Head>
+
     <QueryClientProvider client={queryClient}>
       <MantineProvider
-        theme={shipTheme}
+        theme={appTheme}
         withGlobalStyles
         withNormalizeCSS
       >
         <ModalsProvider>
           <Global styles={globalStyles} />
-          <Notifications autoClose={10000} />
 
           <PageConfig>
             <Component {...pageProps} />

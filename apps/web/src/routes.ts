@@ -13,13 +13,6 @@ export enum RoutePath {
   Home = '/',
   Profile = '/profile',
 
-  // Auth paths
-  SignIn = '/sign-in',
-  SignUp = '/sign-up',
-  ForgotPassword = '/forgot-password',
-  ResetPassword = '/reset-password',
-  ExpireToken = '/expire-token',
-
   NotFound = '/404',
 }
 
@@ -39,28 +32,6 @@ export const routesConfiguration: RoutesConfiguration = {
   [RoutePath.Profile]: {
     scope: ScopeType.PRIVATE,
     layout: LayoutType.MAIN,
-  },
-
-  // Auth routes
-  [RoutePath.SignIn]: {
-    scope: ScopeType.PUBLIC,
-    layout: LayoutType.UNAUTHORIZED,
-  },
-  [RoutePath.SignUp]: {
-    scope: ScopeType.PUBLIC,
-    layout: LayoutType.UNAUTHORIZED,
-  },
-  [RoutePath.ForgotPassword]: {
-    scope: ScopeType.PUBLIC,
-    layout: LayoutType.UNAUTHORIZED,
-  },
-  [RoutePath.ResetPassword]: {
-    scope: ScopeType.PUBLIC,
-    layout: LayoutType.UNAUTHORIZED,
-  },
-  [RoutePath.ExpireToken]: {
-    scope: ScopeType.PUBLIC,
-    layout: LayoutType.UNAUTHORIZED,
   },
 
   [RoutePath.NotFound]: {},

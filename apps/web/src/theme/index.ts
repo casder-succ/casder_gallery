@@ -1,6 +1,6 @@
 import { MantineTheme, MantineThemeOverride } from '@mantine/core';
 
-const shipTheme: MantineThemeOverride = {
+const appTheme: MantineThemeOverride = {
   fontFamily: 'Roboto, sans-serif',
   fontFamilyMonospace: 'monospace',
   headings: {
@@ -64,31 +64,6 @@ const shipTheme: MantineThemeOverride = {
         },
       }),
     },
-    PasswordInput: {
-      defaultProps: { size: 'lg' },
-      styles: (theme: MantineTheme) => ({
-        root: {
-          input: {
-            fontSize: '16px !important',
-
-            '&::placeholder': {
-              color: '#6d747b',
-            },
-          },
-        },
-        label: {
-          fontSize: '18px',
-          fontWeight: 600,
-        },
-        invalid: {
-          input: {
-            '&::placeholder': {
-              color: theme.colors.red[6],
-            },
-          },
-        },
-      }),
-    },
     Select: {
       defaultProps: { size: 'md' },
     },
@@ -102,4 +77,4 @@ const shipTheme: MantineThemeOverride = {
   },
 };
 
-export default shipTheme;
+export default appTheme;
