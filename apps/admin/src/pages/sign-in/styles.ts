@@ -1,12 +1,11 @@
 import { createStyles } from '@mantine/core';
 
-export const useStyles = createStyles(({ white, black }) => ({
+export const useStyles = createStyles(({ white }) => ({
   root: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   content: {
     maxWidth: 240,
@@ -16,14 +15,15 @@ export const useStyles = createStyles(({ white, black }) => ({
   },
   info: {
     color: white,
-    fontWeight: 200,
+    fontWeight: 400,
     fontSize: 19,
+    textAlign: 'center',
   },
   googleButton: {
     fontFamily: 'Roboto, sans-serif',
     width: '100%',
     backgroundColor: white,
-    color: black,
+    color: '#092327',
     fontWeight: 500,
     fontSize: 14,
     border: 'none',

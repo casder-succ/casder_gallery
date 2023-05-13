@@ -24,7 +24,7 @@ const SignUp: NextPage = () => {
       <Stack className={classes.root}>
         <Stack className={classes.content}>
           <Text className={classes.info}>
-            You’re a priority. Why wait?
+            Welcome to Casder&apos;s gallery!
           </Text>
 
           <Stack align="center" spacing={8}>

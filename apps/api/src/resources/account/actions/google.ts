@@ -48,10 +48,12 @@ const signInGoogleWithCode = async (ctx: AppKoaContext<ValidatedData>) => {
   const  user = await userService.findOne({ email: payload.email });
 
   if (user) {
-    return Promise.all([
+    await Promise.all([
       userService.updateLastRequest(user._id),
       authService.setTokens(ctx, user._id),
     ]);
+
+    return ctx.redirect(config.adminUrl);
   }
 
   const newUser = await userService.insertOne({

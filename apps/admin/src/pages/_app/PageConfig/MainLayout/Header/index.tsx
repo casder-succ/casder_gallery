@@ -1,16 +1,11 @@
 import { memo, FC } from 'react';
-import { RoutePath } from 'routes';
+
 import {
   Header as LayoutHeader,
-  Container,
+  Container, Title, Avatar,
 } from '@mantine/core';
-import { Link } from 'components';
-import { LogoImage } from 'public/images';
 
 import { accountApi } from 'resources/account';
-
-import UserMenu from './components/UserMenu';
-import ShadowLoginBanner from './components/ShadowLoginBanner';
 
 const Header: FC = () => {
   const { data: account } = accountApi.useGet();
@@ -19,24 +14,39 @@ const Header: FC = () => {
 
   return (
     <LayoutHeader height="72px">
-      {account.isShadow && <ShadowLoginBanner email={account.email} />}
       <Container
-        sx={(theme) => ({
+        sx={() => ({
           minHeight: '72px',
           padding: '0 32px',
           display: 'flex',
           flex: '1 1 auto',
           alignItems: 'center',
           justifyContent: 'space-between',
-          backgroundColor: theme.white,
-          borderBottom: `1px solid ${theme.colors.gray[4]}`,
+          backgroundColor: '#092327',
         })}
         fluid
       >
-        <Link type="router" href={RoutePath.Home}>
-          <LogoImage />
-        </Link>
-        <UserMenu />
+        <Title
+          order={2}
+          sx={{
+            color: '#fff',
+          }}
+        >
+          Casder&apos;s gallery
+        </Title>
+
+        <Avatar
+          sx={{
+            '.mantine-Avatar-placeholder': {
+              backgroundColor: '#9AC8E9',
+              color: '#4E8098',
+            },
+          }}
+          radius="xl"
+        >
+          {account.firstName.charAt(0)}
+          {account.lastName.charAt(0)}
+        </Avatar>
       </Container>
     </LayoutHeader>
   );
