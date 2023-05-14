@@ -17,7 +17,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => (
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        backgroundColor: theme.colors.gray[0],
+        backgroundColor: theme.white,
       },
       main: {
         padding: '32px',

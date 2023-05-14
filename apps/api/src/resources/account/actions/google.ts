@@ -68,6 +68,7 @@ const signInGoogleWithCode = async (ctx: AppKoaContext<ValidatedData>) => {
     await Promise.all([
       userService.updateLastRequest(newUser._id),
       authService.setTokens(ctx, newUser._id),
+      allowedEmailService.updateOne({ email: newUser.email }, () => ({ isRegistered: true })),
     ]);
   }
 
