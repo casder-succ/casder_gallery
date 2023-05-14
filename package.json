@@ -1,5 +1,5 @@
 {
-  "name": "ship",
+  "name": "casder-gallary",
   "scripts": {
     "infra": "bash ./bin/start.sh mongo mongo-replicator",
     "turbo-start": "turbo run development",

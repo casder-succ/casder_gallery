@@ -6,6 +6,8 @@ const schema = z.object({
   image: z.string(),
   title: z.string(),
   description: z.string(),
+  tileSource: z.string().optional(),
+  directory: z.string().optional(),
 
   createdOn: z.date().optional(),
   updatedOn: z.date().optional(),

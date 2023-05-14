@@ -1,8 +1,16 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
+import { imageApi } from 'resources/image';
+
+import { CreatePictureModal } from './components';
+
 const Pictures:NextPage = () => {
-  const a = 1;
+  const { data: pictures, isLoading } = imageApi.useList();
+
+  if (isLoading || !pictures) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -12,9 +20,7 @@ const Pictures:NextPage = () => {
         </title>
       </Head>
 
-      <div>
-        {a}
-      </div>
+      <CreatePictureModal />
     </>
   );
 };

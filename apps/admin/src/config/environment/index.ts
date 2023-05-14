@@ -11,9 +11,7 @@ const base = {
   apiUrl: '',
   wsUrl: '',
   webUrl: '',
-  mixpanel: {
-    apiKey: process.env.NEXT_PUBLIC_MIXPANEL_API_KEY || '',
-  },
+  tempServer: '',
 };
 
 export default merge(base, config);

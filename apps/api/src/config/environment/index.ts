@@ -13,6 +13,7 @@ const base = {
   apiUrl: '',
   webUrl: '',
   adminUrl: '',
+  tempServer: '',
   cloudStorage: {
     endpoint: process.env.CLOUD_STORAGE_ENDPOINT || '',
     bucket: process.env.CLOUD_STORAGE_BUCKET || '',
