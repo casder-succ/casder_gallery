@@ -2,6 +2,7 @@ const DATABASE_DOCUMENTS = {
   USERS: 'users',
   TOKENS: 'tokens',
   ALLOWED_EMAILS: 'allowed_emails',
+  IMAGES: 'images',
 };
 
 const COOKIES = {
