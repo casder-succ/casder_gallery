@@ -7,6 +7,7 @@ import { accountRoutes } from 'resources/account';
 import { userRoutes } from 'resources/user';
 import { allowedEmailRoutes } from 'resources/allowed-email';
 import { imageRoutes } from 'resources/image';
+import { sceneRoutes } from 'resources/scene';
 
 import auth from './middlewares/auth.middleware';
 
@@ -15,4 +16,5 @@ export default (app: AppKoa) => {
   app.use(mount('/users', compose([auth, userRoutes.privateRoutes])));
   app.use(mount('/allowed-emails', compose([auth, allowedEmailRoutes.privateRoutes])));
   app.use(mount('/images', compose([auth, imageRoutes.privateRoutes])));
+  app.use(mount('/scenes', compose([auth, sceneRoutes.privateRoutes])));
 };

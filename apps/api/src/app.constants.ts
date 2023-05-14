@@ -3,6 +3,7 @@ const DATABASE_DOCUMENTS = {
   TOKENS: 'tokens',
   ALLOWED_EMAILS: 'allowed_emails',
   IMAGES: 'images',
+  SCENES: 'scenes',
 };
 
 const COOKIES = {

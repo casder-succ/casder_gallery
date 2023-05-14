@@ -13,6 +13,8 @@ export enum RoutePath {
 
   Admins = '/admins',
   Pictures = '/pictures',
+  Picture = '/pictures/[pictureId]',
+  Scenes = '/pictures/[pictureId]/scenes',
 
   SignIn = '/sign-in',
 
@@ -36,6 +38,14 @@ export const routesConfiguration: RoutesConfiguration = {
     layout: LayoutType.MAIN,
   },
   [RoutePath.Pictures]: {
+    scope: ScopeType.PRIVATE,
+    layout: LayoutType.MAIN,
+  },
+  [RoutePath.Picture]: {
+    scope: ScopeType.PRIVATE,
+    layout: LayoutType.MAIN,
+  },
+  [RoutePath.Scenes]: {
     scope: ScopeType.PRIVATE,
     layout: LayoutType.MAIN,
   },

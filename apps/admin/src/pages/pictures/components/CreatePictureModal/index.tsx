@@ -26,9 +26,7 @@ const schema = z.object({
   title: z.string()
     .min(1, 'Field is required')
     .max(50, 'Name should not exceed 50 characters'),
-  description: z.string()
-    .min(1, 'Field is required')
-    .max(500, 'Ingredients should not exceed 500 characters'),
+  description: z.string().min(1, 'Field is required'),
 });
 type FormValues = z.infer<typeof schema>;
 

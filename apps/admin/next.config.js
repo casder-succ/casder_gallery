@@ -14,7 +14,6 @@ module.exports = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
-  reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },

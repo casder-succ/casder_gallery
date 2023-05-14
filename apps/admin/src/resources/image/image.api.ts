@@ -2,6 +2,8 @@ import { useMutation, useQuery } from 'react-query';
 
 import queryClient from 'query-client';
 import { apiService } from 'services';
+import router from 'next/router';
+import { RoutePath } from 'routes';
 
 export function useList() {
   const list = () => apiService.get('/images');
@@ -12,7 +14,14 @@ export function useList() {
 export function useGet(id: string) {
   const get = () => apiService.get(`/images/${id}`);
 
-  return useQuery(['images.entity', id], get);
+  return useQuery(['images.entity', id], get, {
+    enabled: !!id,
+    onError: (err: any) => {
+      if (err.status === 404) {
+        router.push(RoutePath.NotFound);
+      }
+    },
+  });
 }
 
 export function useCreate() {

@@ -22,7 +22,10 @@ const Navbar: FC = () => {
           padding: '60px 30px',
         }}
       >
-        <Link href={RoutePath.Admins}>
+        <Link
+          type="router"
+          href={RoutePath.Admins}
+        >
           Admins
         </Link>
 

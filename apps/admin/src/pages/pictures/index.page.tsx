@@ -1,15 +1,17 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
+import { Loader, Stack } from '@mantine/core';
+
 import { imageApi } from 'resources/image';
 
-import { CreatePictureModal } from './components';
+import { CreatePictureModal, PicturesList } from './components';
 
 const Pictures:NextPage = () => {
   const { data: pictures, isLoading } = imageApi.useList();
 
   if (isLoading || !pictures) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
@@ -20,7 +22,11 @@ const Pictures:NextPage = () => {
         </title>
       </Head>
 
-      <CreatePictureModal />
+      <Stack sx={{ height: '100%' }}>
+        <CreatePictureModal />
+
+        <PicturesList pictures={pictures} />
+      </Stack>
     </>
   );
 };
