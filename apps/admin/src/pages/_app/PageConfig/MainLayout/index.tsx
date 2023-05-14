@@ -2,6 +2,7 @@ import { FC, ReactElement } from 'react';
 import { AppShell } from '@mantine/core';
 
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 interface MainLayoutProps {
   children: ReactElement;
@@ -10,6 +11,7 @@ interface MainLayoutProps {
 const MainLayout: FC<MainLayoutProps> = ({ children }) => (
   <AppShell
     header={<Header />}
+    navbar={<Sidebar />}
     styles={(theme) => ({
       root: {
         display: 'flex',
@@ -20,6 +22,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => (
       main: {
         padding: '32px',
         paddingTop: '104px',
+        paddingLeft: '232px',
       },
     })}
   >

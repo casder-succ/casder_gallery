@@ -10,7 +10,9 @@ export enum LayoutType {
 
 export enum RoutePath {
   Home = '/',
-  Profile = '/profile',
+
+  Admins = '/admins',
+  Pictures = '/pictures',
 
   SignIn = '/sign-in',
 
@@ -29,7 +31,11 @@ export const routesConfiguration: RoutesConfiguration = {
     scope: ScopeType.PRIVATE,
     layout: LayoutType.MAIN,
   },
-  [RoutePath.Profile]: {
+  [RoutePath.Admins]: {
+    scope: ScopeType.PRIVATE,
+    layout: LayoutType.MAIN,
+  },
+  [RoutePath.Pictures]: {
     scope: ScopeType.PRIVATE,
     layout: LayoutType.MAIN,
   },
