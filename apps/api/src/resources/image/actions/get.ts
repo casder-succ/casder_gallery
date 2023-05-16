@@ -1,5 +1,7 @@
 import { AppKoaContext, AppRouter, Next } from 'types';
 
+import { DATABASE_DOCUMENTS } from 'app.constants';
+
 import { imageService } from 'resources/image';
 
 type Request = {
@@ -15,7 +17,9 @@ async function validator(ctx: AppKoaContext<never, Request>, next: Next) {
     _id: id,
   });
 
-  ctx.assertError(isExists, 'Image not found');
+  ctx.assertClientError(isExists, {
+    message: 'Image not found',
+  }, 404);
 
   await next();
 }
@@ -23,9 +27,21 @@ async function validator(ctx: AppKoaContext<never, Request>, next: Next) {
 async function handler(ctx: AppKoaContext<never, Request>) {
   const { id } = ctx.request.params;
   
-  const image = await imageService.findOne({
-    _id: id,
-  });
+  const [image] = await imageService.aggregate([
+    {
+      $match: {
+        _id: id,
+      },
+    },
+    {
+      $lookup: {
+        from: DATABASE_DOCUMENTS.SCENES,
+        localField: '_id',
+        foreignField: 'pictureId',
+        as: 'scenes',
+      },
+    },
+  ]);
 
   ctx.body = image;
 }

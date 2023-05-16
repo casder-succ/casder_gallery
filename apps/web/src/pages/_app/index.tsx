@@ -31,7 +31,6 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
             <Component {...pageProps} />
           </PageConfig>
         </ModalsProvider>
-        <ReactQueryDevtools position="bottom-right" />
       </MantineProvider>
     </QueryClientProvider>
   </>
